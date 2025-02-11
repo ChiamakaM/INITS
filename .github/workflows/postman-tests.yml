@@ -1,0 +1,25 @@
+name: Run Postman Tests
+
+on:
+  push:
+    branches:
+      - main  # This will trigger the action when changes are pushed to the "main" branch
+
+jobs:
+  postman-tests:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu OS for the runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # This checks out your repository code
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2  # Set up Node.js environment
+        with:
+          node-version: '14'  # Use Node.js version 14
+
+      - name: Install Newman
+        run: npm install -g newman  # This installs Newman, the CLI tool for running Postman collections
+
+      - name: Run Postman tests
+        run: newman run your-collection-file.json  # Run your Postman collection (replace with your actual filename)
